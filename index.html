@@ -9,9 +9,17 @@
 <body>
 	<div class="container px-5 text-center pt-3">
 
+		<div class="mb-3">
+			<label for="">Place the names separated by commas (,)</label>
+			<textarea placeholder="It is not required" name="" id="playersName" cols="30" rows="2" class="form-control mb-3"></textarea>
+			<div style="display: none" class="invalid-feedback">
+		      Max 5 players
+		    </div>
+		</div>
+
 		<button id="lets" class="btn btn-outline-success" onclick="randomPlayer()" >Let´s Go</button>
 	
-		<table class="table text-center table-striped table-sm table-hover" style="display:none">
+		<table class="table text-center table-striped table-sm table-hover mt-2" style="display:none">
 			<thead class="thead-dark">
 				<tr>
 					<th scope="col">Player</th>
@@ -33,20 +41,42 @@
 	let players = ['Jesus','Wendy','Victor','Samuel','Miguel'];
 	let lines = ['Mid','Sup','Jg','Bot','Top'];
 
+	 $('#playersName').on('keyup',function(){
+	 	let text = $('#playersName').val()
+	 	let players = text.split(',');
+	 	console.log(players.length)
+	 	if (players.length > 5) {
+	 		$('#playersName').addClass('is-invalid')
+			$('.invalid-feedback').show();
+	 	} else {
+			$('.invalid-feedback').hide();
+	 		$('#playersName').removeClass('is-invalid')
+	 	}
+	 })
+
+
 	function randomPlayer(){
-		players = players.sort(function() {return Math.random() - 0.5});
-		lines = lines.sort(function() {return Math.random() - 0.5});
-		let template = '';
-		for(let i = 0; i<lines.length;i++){
-			template += `
-		  	<tr>
-		      <th scope="row">${players[i]}</th>
-		      <td>${lines[i]}</td>
-		    </tr>`;
+		let text = $('#playersName').val()
+
+		if(text != ''){
+			players = text.split(',');
 		}
-		$('#list').html(template);
-		$('#lets').hide();
-		$('.table').show();
+			
+		if(players.length <= lines.length){
+			players = players.sort(function() {return Math.random() - 0.5});
+			lines = lines.sort(function() {return Math.random() - 0.5});
+			let template = '';
+			for(let i = 0; i<players.length;i++){
+				template += `
+			  	<tr>
+			      <th scope="row">${players[i]}</th>
+			      <td>${lines[i]}</td>
+			    </tr>`;
+			}
+			$('#list').html(template);
+			$('.table').show();
+		}
+
 	}
 </script>
 </body>
