@@ -1,49 +1,52 @@
-<html>
-	<head>
-		<tittle>Random Player Line</tittle>
-		<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" />
-	</head>
-	<body>
-<div class="container px-5 text-center pt-3">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>RPL | Random Player Line</title>
 
-<button id="lets" class="btn btn-outline-success" onclick="randomPlayer()" >Let´s Go</button>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+	<div class="container px-5 text-center pt-3">
+
+		<button id="lets" class="btn btn-outline-success" onclick="randomPlayer()" >Let´s Go</button>
 	
-	<table class="table text-center table-striped table-sm table-hover" style="display:none">
-		<thead class="thead-dark">
-			<tr>
-				<th scope="col">Player</th>
-				<th scope="col">Line</th>
-			</tr>
-		</thead>
-		<tbody id="list">
+		<table class="table text-center table-striped table-sm table-hover" style="display:none">
+			<thead class="thead-dark">
+				<tr>
+					<th scope="col">Player</th>
+					<th scope="col">Line</th>
+				</tr>
+			</thead>
+			<tbody id="list">
 
-		</tbody>
-		<tfooter>
-			<tr class="table-success">
-				<th colspan="2">Good luck!</th>
-			</tr>
-		</tfooter>
-	</table>
-</div>
+			</tbody>
+			<tfooter>
+				<tr class="table-success">
+					<th colspan="2">Good luck!</th>
+				</tr>
+			</tfooter>
+		</table>
+	</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <script>
 	let players = ['Jesus','Wendy','Victor','Samuel','Miguel'];
 	let lines = ['Mid','Sup','Jg','Bot','Top'];
+
 	function randomPlayer(){
 		players = players.sort(function() {return Math.random() - 0.5});
 		lines = lines.sort(function() {return Math.random() - 0.5});
 		let template = '';
 		for(let i = 0; i<lines.length;i++){
 			template += `
-		  <tr>
-	      <th scope="row">${players[i]}</th>
-	      <td>${lines[i]}</td>
-	    </tr>`;
+		  	<tr>
+		      <th scope="row">${players[i]}</th>
+		      <td>${lines[i]}</td>
+		    </tr>`;
 		}
 		$('#list').html(template);
 		$('#lets').hide();
 		$('.table').show();
-
 	}
 </script>
 </body>
